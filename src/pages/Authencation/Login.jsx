@@ -1,10 +1,12 @@
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2';
+import { FcGoogle } from "react-icons/fc";
 
 
 const Login = () => {
-    const { signIn } = useAuth();
+    const { signIn, googleLogin } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const {
@@ -18,11 +20,29 @@ const Login = () => {
         console.log(data);
         const { email, password } = data;
         signIn(email, password)
-        .then(result=>{
-            console.log(result.user);
-            navigate(location?.state ? location.state : '/')
-        })
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(location?.state ? location.state : '/')
+            })
         reset();
+    }
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                if (result.user) {
+                    navigate(location?.state || '/')
+                }
+            })
+            .catch(error => {
+                console.error(error.message)
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -54,8 +74,10 @@ const Login = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <div className="mt-6">
+                        <button onClick={handleGoogleLogin} className="btn btn-block"><FcGoogle className="text-2xl"></FcGoogle> Google</button>
+                    </div>
                     <p><small>New here? <Link to='/register'>Create an account</Link></small></p>
-                    {/* <SocialLogin></SocialLogin> */}
                 </div>
             </div>
         </div>
