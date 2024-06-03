@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 
 const Register = () => {
+    const { createUser, updateUserProfile } = useAuth()
+
     const {
         register,
         handleSubmit,
@@ -12,6 +15,36 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        const { email, password } = data;
+        createUser(email, password)
+            .then((result) => {
+                // Signed in 
+                const user = result.user;
+                console.log(user)
+                // updateUserProfile(name, photo)
+                //     .then(() => {
+                //         // send user data in database
+                //         const userInfo = {
+                //             name: name,
+                //             email: email
+                //         }
+                //         axiosPublic.post('/users', userInfo)
+                //             .then(res => {
+                //                 if (res.data.insertedId) {
+                //                     console.log('user added to the database')
+                //                     Swal.fire({
+                //                         position: "top-end",
+                //                         icon: "success",
+                //                         title: "Profile created successfully",
+                //                         showConfirmButton: false,
+                //                         timer: 1500
+                //                     });
+                //                     navigate('/')
+                //                 }
+                //             })
+                //     })
+            })
+        // reset();
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -49,6 +82,9 @@ const Register = () => {
                             {errors.password?.type === 'required' && <span>This field is required</span>}
                             {errors.password?.type === 'minLength' && <span>Password must be 6 character</span>}
                             {errors.password?.type === 'pattern' && <span>Password must be one uppercase, one lower case, one special character</span>}
+                        </div>
+                        <div className="mb-6">
+                            <input type="file" {...register('image', { required: true })} className="file-input w-full max-w-xs" />
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Sign Up</button>
