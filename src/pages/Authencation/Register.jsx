@@ -143,7 +143,7 @@ const Register = () => {
                             <input type="file" {...register('image', { required: true })} className="file-input w-full max-w-xs" />
                             {errors.image && <span>This field is required</span>}
                         </div>
-                        <div className="form-control mt-6 col-span-2">
+                        <div className="form-control mt-6 md:col-span-2">
                             <button className="btn btn-primary">Sign Up</button>
                         </div>
                     </form>
