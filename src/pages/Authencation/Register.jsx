@@ -48,17 +48,42 @@ const Register = () => {
                 if (res.data.success) {
                     updateUserProfile(name, image)
                         .then(() => {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "Profile created successfully",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            navigate('/')
+                            // user entry in database
+                            const userInfo = {
+                                name: name,
+                                email: email,
+                                blood: data.blood,
+                                district: data.district,
+                                upazila: data.upazila,
+                                status: 'active'
+
+                            }
+                            axiosPublic.post('/user', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        console.log('user added to the database')
+                                        Swal.fire({
+                                            position: "top-end",
+                                            icon: "success",
+                                            title: "Profile created successfully",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                        navigate('/')
+                                    }
+                                })
                         });
-                        reset();
+                    reset();
                 }
+            })
+            .catch(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Email already in use",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
 
     }
@@ -120,7 +145,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">District</span>
                             </label>
-                            <select defaultValue='default' {...register("blood", { required: true })} className="select select-bordered w-full">
+                            <select defaultValue='default' {...register("district", { required: true })} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
                                 <option value="Dhaka">Dhaka</option>
                                 <option value="Dhaka">Dhaka</option>
@@ -130,7 +155,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Upazila</span>
                             </label>
-                            <select defaultValue='default' {...register("blood", { required: true })} className="select select-bordered w-full">
+                            <select defaultValue='default' {...register("upazila", { required: true })} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
                                 <option value="Dhaka">Dhaka</option>
                                 <option value="Dhaka">Dhaka</option>
