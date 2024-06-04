@@ -8,6 +8,7 @@ import Register from "../pages/Authencation/Register";
 import Dashboard from "../layouts/Dashboard";
 import Appointment from "../pages/Appointment";
 import AllTest from "../pages/AllTest";
+import AllUser from "../pages/Dashboard/AllUser";
   
   const router = createBrowserRouter([
     {
@@ -37,10 +38,13 @@ import AllTest from "../pages/AllTest";
       ]
     },
     {
-      path: '/dashboard',
+      path: 'dashboard',
       element: <Dashboard/>,
       children: [
-
+        {
+          path: 'allUsers',
+          element: <AllUser/>
+        }
       ]
     }
   ]);
