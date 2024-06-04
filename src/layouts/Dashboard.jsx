@@ -5,9 +5,9 @@ const Dashboard = () => {
     // todo: get isAdmin data from database
     const isAdmin = true;
     return (
-        <div className='flex flex-col lg:flex-row'>
+        <div className='flex'>
             {/* dashboard sidebar */}
-            <div className="w-full lg:w-64 min-h-screen bg-blue-600">
+            <div className="w-1/3 lg:w-64 min-h-screen bg-teal-600">
                 <ul className="menu p-4 text-white">
                     {
                         isAdmin ?
@@ -48,9 +48,12 @@ const Dashboard = () => {
                             </>
                     }
 
-                    <div className="divider divider-primary"></div>
+                    <div className="divider"></div>
 
                     {/* shared menu */}
+                    <li><NavLink to='/dashboard'>
+                        Dashboard
+                    </NavLink></li>
                     <li><NavLink to='/'>
                         Home
                     </NavLink></li>
