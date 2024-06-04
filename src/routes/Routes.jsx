@@ -5,6 +5,7 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Authencation/Login";
 import Register from "../pages/Authencation/Register";
+import Dashboard from "../layouts/Dashboard";
   
   const router = createBrowserRouter([
     {
@@ -25,6 +26,13 @@ import Register from "../pages/Authencation/Register";
         },
       ]
     },
+    {
+      path: '/dashboard',
+      element: <Dashboard/>,
+      children: [
+        
+      ]
+    }
   ]);
   
   export default router;

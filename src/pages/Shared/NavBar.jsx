@@ -3,27 +3,11 @@ import useAuth from "../../hooks/useAuth";
 
 
 const NavBar = () => {
-    const {user, logOut} = useAuth()
+    const { user, logOut } = useAuth()
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/menu'>Our Menu</Link></li>
-        <li><Link to='/order/salad'>Our Shop</Link></li>
-        <li><Link to='/secret'>Secret</Link></li>
-        {/* {
-        user && isAdmin && <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
-    }
-    {
-        user && !isAdmin && <li><Link to='/dashboard/userHome'>Dashboard</Link></li>
-    } */}
-        {/* <li>
-        <Link to='/dashboard/cart'>
-            <button className="flex gap-2 items-center">
-                <FaCartShopping></FaCartShopping>
-                <div className="badge badge-secondary text-white">+{cart.length}</div>
-            </button>
-        </Link>
-    </li>
-     */}
+        <li><Link to='/allTest'>All Test</Link></li>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
     </>
     return (
         <div>
@@ -47,7 +31,21 @@ const NavBar = () => {
                 <div className="navbar-end mr-4">
                     {
                         user ?
-                            <><button onClick={logOut} className="">Logout</button></>
+                            <>
+                                <div>
+                                    <div className="btn btn-ghost btn-circle avatar relative group">
+                                        <div className="w-10 rounded-full">
+                                            <img alt="Tailwind CSS Navbar component" src={user?.photoURL || 'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'} />
+                                        </div>
+                                        <span className="text-black bg-gray-100 p-3 rounded-lg absolute right-12 opacity-0 group-hover:opacity-70">
+                                            <div className="flex flex-col gap-2">
+                                                {user.displayName || 'Unknown'}
+                                                <Link className="bg-red-500 p-2 text-white rounded-md" onClick={logOut}>Logout</Link>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </>
                             :
                             <><Link to='/login'>Login</Link></>
                     }
