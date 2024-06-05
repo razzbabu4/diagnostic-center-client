@@ -6,7 +6,7 @@ const Dashboard = () => {
     return (
         <div className='flex'>
             {/* dashboard sidebar */}
-            <div className="w-1/3 lg:w-64 min-h-screen bg-teal-600">
+            <div className="w-2/5 lg:w-64 min-h-screen bg-teal-600">
                 <ul className="menu p-4 text-white">
                     {
                         isAdmin ?
