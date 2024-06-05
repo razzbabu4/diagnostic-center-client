@@ -1,9 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
-
-    // todo: get isAdmin data from database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className='flex'>
             {/* dashboard sidebar */}
@@ -51,14 +50,14 @@ const Dashboard = () => {
                     <div className="divider"></div>
 
                     {/* shared menu */}
-                    <li><NavLink to='/dashboard'>
-                        Dashboard
-                    </NavLink></li>
                     <li><NavLink to='/'>
                         Home
                     </NavLink></li>
                     <li><NavLink to='/allTest'>
                         All Test
+                    </NavLink></li>
+                    <li><NavLink to='/appointment'>
+                        Appointment
                     </NavLink></li>
                 </ul>
             </div>

@@ -1,18 +1,25 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
 
 
 const NavBar = () => {
-    const { user, logOut } = useAuth()
+    const { user, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/allTest'>All Test</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
+        {
+            user && isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
+        }
+        {
+            user && !isAdmin && <li><Link to='/dashboard/'>Dashboard</Link></li>
+        }
     </>
     return (
         <div>
-            <div className="navbar max-w-screen-xl mx-auto bg-opacity-30 bg-black text-white">
+            <div className="navbar lg:h-20 max-w-screen-xl mx-auto bg-opacity-30 bg-black text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,22 +40,13 @@ const NavBar = () => {
                     {
                         user ?
                             <>
-                                <div>
-                                    <div className="btn btn-ghost btn-circle avatar relative group">
-                                        <div className="w-10 rounded-full">
-                                            <img alt="Tailwind CSS Navbar component" src={user?.photoURL || 'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'} />
-                                        </div>
-                                        <span className="text-black bg-gray-100 p-3 rounded-lg absolute right-12 opacity-0 group-hover:opacity-70">
-                                            <div className="flex flex-col gap-2">
-                                                {user.displayName || 'Unknown'}
-                                                <Link className="bg-red-500 p-2 text-white rounded-md" onClick={logOut}>Logout</Link>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </div>
+                                <span>{user?.email} </span>
+                                <Link className="bg-red-500 py-1 px-3 text-white rounded-md ml-2" onClick={logOut}>Logout</Link>
                             </>
                             :
-                            <><Link to='/login'>Login</Link></>
+                            <>
+                                <Link className="bg-teal-500 py-1 px-3 text-white rounded-md" to='/login'>Login</Link>
+                            </>
                     }
                 </div>
             </div>
