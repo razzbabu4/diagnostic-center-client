@@ -58,7 +58,7 @@ const Register = () => {
                                 status: 'active'
 
                             }
-                            axiosPublic.post('/user', userInfo)
+                            axiosPublic.post('/users', userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
                                         console.log('user added to the database')
@@ -70,10 +70,10 @@ const Register = () => {
                                             timer: 1500
                                         });
                                         navigate('/')
+                                        reset();
                                     }
                                 })
                         });
-                    reset();
                 }
             })
             .catch(() => {

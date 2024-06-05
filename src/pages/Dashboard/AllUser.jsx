@@ -1,31 +1,41 @@
 import { FaUsers } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from 'sweetalert2';
+import { ImBlocked } from "react-icons/im";
 const AllUser = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/users');
+            const res = await axiosSecure.get('/users');
             return res.data;
         }
     })
 
     const handleMakeAdmin = (user) => {
-        console.log(user)
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is admin now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
-    const handleDeleteItem = (user) => {
+    const handleBlockedUser = (user) => {
         console.log(user)
     }
 
     return (
         <div>
-            <div className="flex justify-evenly my-4">
-                <h2 className="text-3xl ">All Users</h2>
-                <h2 className="text-3xl ">Total Users: {users.length}</h2>
-            </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     {/* head */}
@@ -45,17 +55,18 @@ const AllUser = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {user.role === 'admin' ? 'Admin' : <button
+                                    {user.role === 'admin' ? <button className="btn btn-sm btn-disabled">Admin</button> : <button
                                         onClick={() => handleMakeAdmin(user)}
                                         className="btn btn-sm bg-orange-500">
                                         <FaUsers className="text-white"></FaUsers>
                                     </button>}
                                 </td>
                                 <td>
-                                    <button
-                                        onClick={() => handleDeleteItem(user)}
-                                        className="btn btn-sm bg-red-500">
-                                    </button>
+                                {user.status === 'blocked' ? <button className="btn btn-sm btn-disabled"><ImBlocked/></button> : user.role === 'admin'? <button className="btn btn-disabled btn-sm">Active</button> : <button
+                                        onClick={() => handleBlockedUser(user)}
+                                        className="btn btn-sm bg-orange-500">
+                                        Active
+                                    </button>}
                                 </td>
                             </tr>)
                         }
