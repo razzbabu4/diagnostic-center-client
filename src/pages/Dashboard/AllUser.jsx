@@ -84,18 +84,18 @@ const AllUser = () => {
                                     {user.role === 'admin' ? <button className="btn btn-sm btn-disabled">Admin</button> : user.status === 'blocked' ? <button className="btn btn-disabled btn-sm bg-green-800 text-white"><FaUsers className="text-white"></FaUsers></button> : <button
                                         onClick={() => handleMakeAdmin(user)}
                                         className="btn btn-sm bg-green-800 text-white">
-                                        <FaUsers className="text-white"></FaUsers>
+                                        <FaUsers className="text-white text-lg"></FaUsers>
                                     </button>}
                                 </td>
                                 <td>
                                     {user.status === 'blocked' ? <button className="btn btn-sm btn-disabled"><ImBlocked /></button> : user.role === 'admin' ? <button className="btn btn-disabled btn-sm">Block</button> : <button
                                         onClick={() => handleBlockedUser(user)}
-                                        className="btn btn-sm bg-green-800 text-white">
+                                        className="btn btn-sm bg-red-500 text-white">
                                         Block
                                     </button>}
                                 </td>
                                 <td>
-                                    <button className="btn btn-sm" onClick={() => handleSeeInfo(user)}>
+                                    <button className="btn btn-sm bg-teal-500 text-white" onClick={() => handleSeeInfo(user)}>
                                         See Info
                                     </button>
                                 </td>

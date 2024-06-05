@@ -9,6 +9,7 @@ import Dashboard from "../layouts/Dashboard";
 import Appointment from "../pages/Appointment";
 import AllTest from "../pages/AllTest";
 import AllUser from "../pages/Dashboard/AllUser";
+import AddBanner from "../pages/Dashboard/AddBanner";
   
   const router = createBrowserRouter([
     {
@@ -20,19 +21,19 @@ import AllUser from "../pages/Dashboard/AllUser";
           element: <Home/>
         },
         {
-          path: '/allTest',
+          path: 'allTest',
           element: <AllTest/>
         },
         {
-          path: '/appointment',
+          path: 'appointment',
           element: <Appointment/>
         },
         {
-          path: '/login',
+          path: 'login',
           element: <Login/>
         },
         {
-          path: '/register',
+          path: 'register',
           element: <Register/>
         },
       ]
@@ -44,7 +45,11 @@ import AllUser from "../pages/Dashboard/AllUser";
         {
           path: 'allUsers',
           element: <AllUser/>
-        }
+        },
+        {
+          path: 'addBanner',
+          element: <AddBanner/>
+        },
       ]
     }
   ]);
