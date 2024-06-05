@@ -31,7 +31,20 @@ const AllUser = () => {
             })
     }
     const handleBlockedUser = (user) => {
-        console.log(user)
+        axiosSecure.patch(`/users/blocked/${user._id}`)
+        .then(res => {
+            console.log(res.data)
+            if (res.data.modifiedCount > 0) {
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.name} is blocked!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        })
     }
 
     return (
@@ -55,17 +68,17 @@ const AllUser = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {user.role === 'admin' ? <button className="btn btn-sm btn-disabled">Admin</button> : <button
+                                    {user.role === 'admin' ? <button className="btn btn-sm btn-disabled">Admin</button> : user.status === 'blocked'? <button className="btn btn-disabled btn-sm bg-orange-500"><FaUsers className="text-white"></FaUsers></button> : <button
                                         onClick={() => handleMakeAdmin(user)}
                                         className="btn btn-sm bg-orange-500">
                                         <FaUsers className="text-white"></FaUsers>
                                     </button>}
                                 </td>
                                 <td>
-                                {user.status === 'blocked' ? <button className="btn btn-sm btn-disabled"><ImBlocked/></button> : user.role === 'admin'? <button className="btn btn-disabled btn-sm">Active</button> : <button
+                                {user.status === 'blocked' ? <button className="btn btn-sm btn-disabled"><ImBlocked/></button> : user.role === 'admin'? <button className="btn btn-disabled btn-sm">Block</button> : <button
                                         onClick={() => handleBlockedUser(user)}
                                         className="btn btn-sm bg-orange-500">
-                                        Active
+                                        Block
                                     </button>}
                                 </td>
                             </tr>)
