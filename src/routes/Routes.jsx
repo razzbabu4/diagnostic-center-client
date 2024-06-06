@@ -13,6 +13,7 @@ import AddBanner from "../pages/Dashboard/AddBanner";
 import AllBanner from "../pages/Dashboard/AllBanner";
 import AddTest from "../pages/Dashboard/AddTest";
 import ManageTest from "../pages/Dashboard/ManageTest";
+import UpdateTest from "../pages/Dashboard/UpdateTest";
   
   const router = createBrowserRouter([
     {
@@ -64,6 +65,11 @@ import ManageTest from "../pages/Dashboard/ManageTest";
         {
           path: 'manageTest',
           element: <ManageTest/>
+        },
+        {
+          path: 'updateTest/:id',
+          element: <UpdateTest/>,
+          loader: ({params})=> fetch(`http://localhost:5000/tests/${params.id}`)
         },
       ]
     }

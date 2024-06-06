@@ -2,6 +2,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from '@tanstack/react-query';
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 
@@ -17,12 +18,31 @@ const ManageTest = () => {
         }
     });
 
-    const handleUpdateTest = () =>{
-
-    }
-
-    const handleDelateTest = () => {
-       
+    const handleDelateTest = (test) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/tests/${test._id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your test has been deleted.",
+                                icon: "success"
+                            });
+                            refetch()
+                        }
+                    })
+            }
+        });
 
     }
     return (
@@ -51,11 +71,12 @@ const ManageTest = () => {
                             <td>{test.date}</td>
                             <td>{test.slots}</td>
                             <td>
-                                <button
-                                    onClick={() => handleUpdateTest(test)}
-                                    className="btn btn-sm bg-teal-500 text-white">
-                                    <FaEdit />
-                                </button>
+                            <Link to={`/dashboard/updateTest/${test._id}`}>
+                                        <button
+                                            className="btn btn-sm bg-orange-500">
+                                            <FaEdit className="text-white"></FaEdit>
+                                        </button>
+                                    </Link>
                             </td>
                             <td>
                                 <button
