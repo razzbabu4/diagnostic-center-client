@@ -27,7 +27,7 @@ const Dashboard = () => {
                                     Add Test
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/manageTest'>
-                                    Manage Test
+                                    All Test
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/reservation'>
                                     Reservation
