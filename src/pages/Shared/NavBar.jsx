@@ -14,7 +14,7 @@ const NavBar = () => {
             user && isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
         }
         {
-            user && !isAdmin && <li><Link to='/dashboard/'>Dashboard</Link></li>
+            user && !isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
         }
     </>
     return (

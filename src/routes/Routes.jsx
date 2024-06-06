@@ -10,6 +10,7 @@ import Appointment from "../pages/Appointment";
 import AllTest from "../pages/AllTest";
 import AllUser from "../pages/Dashboard/AllUser";
 import AddBanner from "../pages/Dashboard/AddBanner";
+import AllBanner from "../pages/Dashboard/AllBanner";
   
   const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ import AddBanner from "../pages/Dashboard/AddBanner";
         {
           path: 'addBanner',
           element: <AddBanner/>
+        },
+        {
+          path: 'allBanner',
+          element: <AllBanner/>
         },
       ]
     }
