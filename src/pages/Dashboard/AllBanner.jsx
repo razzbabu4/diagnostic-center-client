@@ -50,7 +50,7 @@ const AllBanner = () => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Your banner has been deleted.",
                                 icon: "success"
                             });
                             refetch()
@@ -63,7 +63,6 @@ const AllBanner = () => {
 
     return (
         <div className="overflow-x-auto">
-            {banners.length}
             <table className="table table-zebra w-full overflow-x-auto">
                 {/* head */}
                 <thead>

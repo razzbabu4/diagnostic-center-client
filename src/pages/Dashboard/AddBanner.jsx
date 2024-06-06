@@ -7,9 +7,9 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddBanner = () => {
-    const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = async (data) => {
         const { name, title, couponCode, couponRate, description} = data;
         console.log(data)
@@ -22,7 +22,7 @@ const AddBanner = () => {
         });
 
         if (res.data.success) {
-            // now send the menu item data to the server with image url
+            // now send the banner data to the server with image url
             const bannerItem = {
                 name: name,
                 title: title,
@@ -32,9 +32,9 @@ const AddBanner = () => {
                 image: res.data.data.display_url,
                 isActive: 'false'
             }
-            const menuRes = await axiosSecure.post('/banners', bannerItem)
-            console.log(menuRes.data)
-            if (menuRes.data.insertedId) {
+            const bannerRes = await axiosSecure.post('/banners', bannerItem)
+            console.log(bannerRes.data)
+            if (bannerRes.data.insertedId) {
                 reset();
                 // success message
                 Swal.fire({

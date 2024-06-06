@@ -11,6 +11,7 @@ import AllTest from "../pages/AllTest";
 import AllUser from "../pages/Dashboard/AllUser";
 import AddBanner from "../pages/Dashboard/AddBanner";
 import AllBanner from "../pages/Dashboard/AllBanner";
+import AddTest from "../pages/Dashboard/AddTest";
   
   const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ import AllBanner from "../pages/Dashboard/AllBanner";
         {
           path: 'allBanner',
           element: <AllBanner/>
+        },
+        {
+          path: 'addTest',
+          element: <AddTest/>
         },
       ]
     }
