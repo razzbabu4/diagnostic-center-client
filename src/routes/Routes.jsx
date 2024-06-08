@@ -6,7 +6,6 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Authencation/Login";
 import Register from "../pages/Authencation/Register";
 import Dashboard from "../layouts/Dashboard";
-import Appointment from "../pages/Appointment";
 import AllTest from "../pages/AllTest";
 import AllUser from "../pages/Dashboard/AllUser";
 import AddBanner from "../pages/Dashboard/AddBanner";
@@ -16,6 +15,9 @@ import ManageTest from "../pages/Dashboard/ManageTest";
 import UpdateTest from "../pages/Dashboard/UpdateTest";
 import ViewDetailsTest from "../components/ViewDetailsTest";
 import PrivateRoute from "./PrivateRoute";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
+import Reviews from "../pages/Reviews";
   
   const router = createBrowserRouter([
     {
@@ -31,8 +33,16 @@ import PrivateRoute from "./PrivateRoute";
           element: <AllTest/>
         },
         {
-          path: 'appointment',
-          element: <Appointment/>
+          path: 'about',
+          element: <AboutUs/>
+        },
+        {
+          path: 'contact',
+          element: <ContactUs/>
+        },
+        {
+          path: 'reviews',
+          element: <Reviews/>
         },
         {
           path: 'viewDetailsTest/:id',

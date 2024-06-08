@@ -22,6 +22,7 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 console.log(result.user);
+                reset();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -31,7 +32,15 @@ const Login = () => {
                 });
                 navigate(location?.state ? location.state : '/')
             })
-        reset();
+            .catch(()=>{
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Invalid email or password",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
     }
     const handleGoogleLogin = () => {
         googleLogin()

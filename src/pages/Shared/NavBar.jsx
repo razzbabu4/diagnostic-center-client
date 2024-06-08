@@ -9,13 +9,16 @@ const NavBar = () => {
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/allTest'>All Test</Link></li>
-        <li><Link to='/appointment'>Appointment</Link></li>
         {
             user && isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
         }
         {
             user && !isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
         }
+        <li><Link to='/about'>About</Link></li>
+        <li><Link to='/contact'>Contact Us</Link></li>
+        <li><Link to='/reviews'>Reviews</Link></li>
+        
     </>
     return (
         <div>

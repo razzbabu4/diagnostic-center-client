@@ -52,6 +52,7 @@ const Register = () => {
                             const userInfo = {
                                 name: name,
                                 email: email,
+                                // image: image,
                                 blood: data.blood,
                                 district: data.district,
                                 upazila: data.upazila,
@@ -79,8 +80,8 @@ const Register = () => {
             .catch(() => {
                 Swal.fire({
                     position: "top-end",
-                    icon: "success",
-                    title: "Email already in use",
+                    icon: "warning",
+                    title: "Email already in use or invalid",
                     showConfirmButton: false,
                     timer: 1500
                 });
