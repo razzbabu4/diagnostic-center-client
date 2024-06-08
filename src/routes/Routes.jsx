@@ -18,11 +18,15 @@ import PrivateRoute from "./PrivateRoute";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
 import Reviews from "../pages/Reviews";
+import ErrorPage from "../pages/ErrorPage";
+import MyProfile from "../pages/Dashboard/User/MyProfile";
+import UpdateProfile from "../pages/Dashboard/User/UpdateProfile";
   
   const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement: <ErrorPage/>,
       children: [
         {
           path: '/',
@@ -62,6 +66,15 @@ import Reviews from "../pages/Reviews";
       path: 'dashboard',
       element: <PrivateRoute><Dashboard/></PrivateRoute>,
       children: [
+        {
+          path: 'userProfile',
+          element: <MyProfile/>
+        },
+        {
+          path: 'updateProfile',
+          element: <UpdateProfile/>
+        },
+        // admin routes
         {
           path: 'allUsers',
           element: <AllUser/>

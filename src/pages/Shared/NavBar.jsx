@@ -13,7 +13,7 @@ const NavBar = () => {
             user && isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
         }
         {
-            user && !isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
+            user && !isAdmin && <li><Link to='/dashboard/userProfile'>Dashboard</Link></li>
         }
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
@@ -22,7 +22,7 @@ const NavBar = () => {
     </>
     return (
         <div>
-            <div className="navbar lg:h-20 max-w-screen-xl mx-auto bg-opacity-30 bg-black text-white">
+            <div className="navbar lg:h-20 max-w-screen-xl mx-auto text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
