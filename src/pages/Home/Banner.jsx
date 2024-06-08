@@ -27,7 +27,7 @@ const Banner = () => {
                                         <p>{banner.description}</p>
                                         <div className="w-full md:w-1/2 relative px-8 py-4 overflow-hidden font-semibold rounded bg-teal-600">
                                             {banner.couponCode}
-                                            <span className="absolute top-0 right-0 px-5 py-1 text-xs tracking-wider text-center uppercase whitespace-no-wrap origin-bottom-left transform rotate-45 -translate-y-full translate-x-1/3 dark:bg-violet-600">{banner.couponRate}%</span>
+                                            <span className="absolute top-0 right-0 px-5 py-1 text-xs tracking-wider text-center uppercase whitespace-no-wrap origin-bottom-left transform rotate-45 -translate-y-full translate-x-1/3 dark:bg-violet-600">${banner.couponRate}</span>
                                         </div>
                                         <div>
                                             <Link to={'/allTest'}>

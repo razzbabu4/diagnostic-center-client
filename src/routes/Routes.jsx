@@ -14,6 +14,8 @@ import AllBanner from "../pages/Dashboard/AllBanner";
 import AddTest from "../pages/Dashboard/AddTest";
 import ManageTest from "../pages/Dashboard/ManageTest";
 import UpdateTest from "../pages/Dashboard/UpdateTest";
+import ViewDetailsTest from "../components/ViewDetailsTest";
+import PrivateRoute from "./PrivateRoute";
   
   const router = createBrowserRouter([
     {
@@ -33,6 +35,10 @@ import UpdateTest from "../pages/Dashboard/UpdateTest";
           element: <Appointment/>
         },
         {
+          path: 'viewDetailsTest/:id',
+          element: <ViewDetailsTest/>
+        },
+        {
           path: 'login',
           element: <Login/>
         },
@@ -44,7 +50,7 @@ import UpdateTest from "../pages/Dashboard/UpdateTest";
     },
     {
       path: 'dashboard',
-      element: <Dashboard/>,
+      element: <PrivateRoute><Dashboard/></PrivateRoute>,
       children: [
         {
           path: 'allUsers',

@@ -20,7 +20,7 @@ const SingleTest = ({test}) => {
                     <span className="flex items-center gap-2 text-lg"><FaCalendarDay/> Date: {test.date}</span>
                 </div>
                 <div className="card-actions">
-                    <Link to={`/viewDetails/${test._id}`} className="btn border-none w-full btn-outline bg-teal-500 text-white">View Details</Link>
+                    <Link to={`/viewDetailsTest/${test._id}`} className="btn border-none w-full btn-outline bg-teal-500 text-white">View Details</Link>
                 </div>
             </div>
         </div>
