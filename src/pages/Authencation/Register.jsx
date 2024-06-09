@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import {useQuery} from '@tanstack/react-query';
 import { useState } from "react";
 import Swal from 'sweetalert2';
 
@@ -14,12 +15,34 @@ const Register = () => {
     const [passErr, setPassErr] = useState('')
     const navigate = useNavigate();
 
+    const {data: district = []} = useQuery({
+        queryKey: ['district'],
+        queryFn: async() =>{
+            const res = await axiosPublic.get('/district')
+            return res.data;
+        }
+
+    }); 
+
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
         reset
     } = useForm();
+
+    const selectedDistrict = watch('district');
+    const selectedDistrictId = district.find(d => d.name === selectedDistrict)?.id;
+
+     const {data: upazila = []} = useQuery({
+        queryKey: ['upazila', selectedDistrictId],
+        queryFn: async() =>{
+            const res = await axiosPublic.get(`/upazila/${selectedDistrictId}`)
+            return res.data;
+        }
+
+    });
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -148,8 +171,9 @@ const Register = () => {
                             </label>
                             <select defaultValue='default' {...register("district", { required: true })} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Dhaka">Dhaka</option>
+                                {
+                                    district.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className="form-control">
@@ -158,8 +182,9 @@ const Register = () => {
                             </label>
                             <select defaultValue='default' {...register("upazila", { required: true })} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Dhaka">Dhaka</option>
+                                {
+                                    upazila.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className="form-control">

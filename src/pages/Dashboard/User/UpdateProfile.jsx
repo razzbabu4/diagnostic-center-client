@@ -19,14 +19,35 @@ const UpdateProfile = () => {
             const res = await axiosSecure.get(`/users/${user.email}`);
             return res.data;
         }
-    })
+    });
+
+    const {data: district = []} = useQuery({
+        queryKey: ['district'],
+        queryFn: async() =>{
+            const res = await axiosPublic.get('/district')
+            return res.data;
+        }
+    }); 
 
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
         reset
     } = useForm();
+
+    const selectedDistrict = watch('district');
+    const selectedDistrictId = district.find(d => d.name === selectedDistrict)?.id;
+
+     const {data: upazila = []} = useQuery({
+        queryKey: ['upazila', selectedDistrictId],
+        queryFn: async() =>{
+            const res = await axiosPublic.get(`/upazila/${selectedDistrictId}`)
+            return res.data;
+        }
+
+    });
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -104,8 +125,9 @@ const UpdateProfile = () => {
                             </label>
                             <select defaultValue={users.district} {...register("district")} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Dhaka">Dhaka</option>
+                                {
+                                    district.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className="form-control">
@@ -114,8 +136,9 @@ const UpdateProfile = () => {
                             </label>
                             <select defaultValue={users.upazila} {...register("upazila")} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Dhaka">Dhaka</option>
+                                {
+                                    upazila.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className="form-control">
