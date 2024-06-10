@@ -1,9 +1,9 @@
-
+import profile from '../../../public/image.png'
 const PatientsReviews = () => {
     return (
         <section className="my-8">
             <div className="container flex flex-col items-center mx-auto mb-4 md:p-10 md:px-12">
-                <h1 className="p-4 text-4xl font-semibold leading-none text-center">What our patients are says</h1>
+                <h1 className="p-4 text-4xl font-semibold leading-none text-center">What our patients are saying</h1>
                 <p className="text-center w-2/3 mx-auto mt-4">At Health Quest Diagnostic Center, we are proud of the positive feedback we receive from our patients. Here are some testimonials that highlight our commitment to quality care, patient comfort, and reliable diagnostic services.</p>
             </div>
             <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
@@ -21,7 +21,7 @@ const PatientsReviews = () => {
                         </p>
                     </div>
                     <div className="flex flex-col items-center justify-center p-8 rounded-b-lg bg-teal-500 text-gray-900 dark:text-gray-50">
-                        <img src="https://source.unsplash.com/50x50/?portrait?1" alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
+                        <img src={profile} alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
                         <p className="text-xl font-semibold leading-tight">Jhon D.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -46,7 +46,7 @@ const PatientsReviews = () => {
                         </p>
                     </div>
                     <div className="flex flex-col items-center justify-center p-8 rounded-b-lg bg-teal-500 text-gray-900 dark:text-gray-50">
-                        <img src="https://source.unsplash.com/50x50/?portrait?2" alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
+                        <img src={profile} alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
                         <p className="text-xl font-semibold leading-tight">Michle P.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -71,7 +71,7 @@ const PatientsReviews = () => {
                         </p>
                     </div>
                     <div className="flex flex-col items-center justify-center p-8 rounded-b-lg bg-teal-500 text-gray-900 dark:text-gray-50">
-                        <img src="https://source.unsplash.com/50x50/?portrait?3" alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
+                        <img src={profile} alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
                         <p className="text-xl font-semibold leading-tight">Maria S.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -96,7 +96,7 @@ const PatientsReviews = () => {
                         </p>
                     </div>
                     <div className="flex flex-col items-center justify-center p-8 rounded-b-lg bg-teal-500 text-gray-900 dark:text-gray-50">
-                        <img src="https://source.unsplash.com/50x50/?portrait?4" alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
+                        <img src={profile} alt="" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full" />
                         <p className="text-xl font-semibold leading-tight">Lind G.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
