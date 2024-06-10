@@ -1,5 +1,11 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
+import { FaCalendar, FaHome, FaInfo, FaNotesMedical, FaUser, FaUsers } from 'react-icons/fa';
+import { MdOutlineNoteAdd } from 'react-icons/md';
+import { LuReplaceAll } from 'react-icons/lu';
+import { GrDocumentTest } from 'react-icons/gr';
+import { GiHypodermicTest } from 'react-icons/gi';
+import { FaBookBookmark, FaMessage } from 'react-icons/fa6';
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -12,37 +18,37 @@ const Dashboard = () => {
                         isAdmin ?
                             <>
                                 <li><NavLink to='/dashboard/adminHome'>
-                                    Admin Home
+                                   <FaHome className='text-lg'/> Admin Home
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/allUsers'>
-                                    All Users
+                                   <FaUsers className='text-lg'/> All Users
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/addBanner'>
-                                    Add Banner
+                                <MdOutlineNoteAdd className='text-lg'/> Add Banner
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/allBanner'>
-                                    All Banner
+                                <LuReplaceAll className='text-lg'/> All Banner
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/addTest'>
-                                    Add Test
+                                <GiHypodermicTest className='text-lg' /> Add Test
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/manageTest'>
-                                    All Test
+                                <GrDocumentTest className='text-lg'/> All Test
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/reservation'>
-                                    Reservation
+                                  <FaBookBookmark className='text-lg'/> Reservation
                                 </NavLink></li>
                             </>
                             :
                             <>
                                 <li><NavLink to='/dashboard/userProfile'>
-                                    My Profile
+                                  <FaUser className='text-lg'/>  My Profile
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/appointment'>
-                                    My Upcoming Appointment
+                                   <FaCalendar className='text-lg' /> My Appointment
                                 </NavLink></li>
                                 <li><NavLink to='/dashboard/testResult'>
-                                    Test Result
+                                <GrDocumentTest className='text-lg'/> Test Result
                                 </NavLink></li>
                             </>
                     }
@@ -51,18 +57,24 @@ const Dashboard = () => {
 
                     {/* shared menu */}
                     <li><NavLink to='/'>
-                        Home
+                    <FaHome className='text-lg'/> Home
                     </NavLink></li>
                     <li><NavLink to='/allTest'>
-                        All Test
+                    <GrDocumentTest className='text-lg'/> All Test
                     </NavLink></li>
-                    <li><NavLink to='/appointment'>
-                        Appointment
+                    <li><NavLink to='/about'>
+                    <FaInfo className='text-lg'/> About
+                    </NavLink></li>
+                    <li><NavLink to='/contact'>
+                    <FaMessage className='text-md'/> Contact Us 
+                    </NavLink></li>
+                    <li><NavLink to='/reviews'>
+                    <FaNotesMedical className='text-lg'/> Reviews 
                     </NavLink></li>
                 </ul>
             </div>
             {/* dashboard content */}
-            <div className='flex-1 border p-8'>
+            <div className='flex-1 p-8'>
                 <Outlet></Outlet>
             </div>
         </div>

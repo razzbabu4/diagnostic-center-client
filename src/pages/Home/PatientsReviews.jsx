@@ -25,7 +25,7 @@ const PatientsReviews = () => {
                         <p className="text-xl font-semibold leading-tight">Jhon D.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
-                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" checked />
+                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -50,7 +50,7 @@ const PatientsReviews = () => {
                         <p className="text-xl font-semibold leading-tight">Michle P.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
-                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" checked />
+                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -75,7 +75,7 @@ const PatientsReviews = () => {
                         <p className="text-xl font-semibold leading-tight">Maria S.</p>
                         <div className="rating mt-2">
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
-                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" checked />
+                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
@@ -102,7 +102,7 @@ const PatientsReviews = () => {
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
-                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" checked />
+                            <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" defaultChecked />
                             <input type="radio" name="rating-4" className="mask mask-star-2 bg-orange-500" />
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import './CheckoutForm.css'
 import { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2'
@@ -14,6 +15,7 @@ const CheckoutForm = ({ finalPrice, test, refetch}) => {
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState('');
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (finalPrice > 0) {
@@ -74,10 +76,11 @@ const CheckoutForm = ({ finalPrice, test, refetch}) => {
                 const reservation = {
                     testId: test._id,
                     email: user.email,
+                    name: test.name,
                     price: finalPrice,
                     transactionId: paymentIntent.id,
-                    date: new Date().toLocaleDateString(),
-                    time: new Date().toLocaleTimeString(),
+                    date: test.date,
+                    time: test.time,
                     details: test.details,
                     status: 'pending'
                 }
@@ -93,6 +96,7 @@ const CheckoutForm = ({ finalPrice, test, refetch}) => {
                         timer: 1500
                     });
                 }
+                navigate('/dashboard/appointment')
             }
         }
 

@@ -13,7 +13,7 @@ const UpdateProfile = () => {
     const axiosPublic = useAxiosPublic();
     
     const axiosSecure = useAxiosSecure()
-    const { data: users = {} } = useQuery({
+    const { data: users = {}, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user.email}`);
@@ -83,6 +83,7 @@ const UpdateProfile = () => {
                                             timer: 1500
                                         });
                                         reset();
+                                        refetch();
                                         setLoading(false)
                                     }
                                 })

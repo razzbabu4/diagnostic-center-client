@@ -1,6 +1,6 @@
 import {
-    createBrowserRouter,
-  } from "react-router-dom";
+  createBrowserRouter,
+} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Authencation/Login";
@@ -21,87 +21,97 @@ import Reviews from "../pages/Reviews";
 import ErrorPage from "../pages/ErrorPage";
 import MyProfile from "../pages/Dashboard/User/MyProfile";
 import UpdateProfile from "../pages/Dashboard/User/UpdateProfile";
-  
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout></MainLayout>,
-      errorElement: <ErrorPage/>,
-      children: [
-        {
-          path: '/',
-          element: <Home/>
-        },
-        {
-          path: 'allTest',
-          element: <AllTest/>
-        },
-        {
-          path: 'about',
-          element: <AboutUs/>
-        },
-        {
-          path: 'contact',
-          element: <ContactUs/>
-        },
-        {
-          path: 'reviews',
-          element: <Reviews/>
-        },
-        {
-          path: 'viewDetailsTest/:id',
-          element: <ViewDetailsTest/>
-        },
-        {
-          path: 'login',
-          element: <Login/>
-        },
-        {
-          path: 'register',
-          element: <Register/>
-        },
-      ]
-    },
-    {
-      path: 'dashboard',
-      element: <PrivateRoute><Dashboard/></PrivateRoute>,
-      children: [
-        {
-          path: 'userProfile',
-          element: <MyProfile/>
-        },
-        {
-          path: 'updateProfile',
-          element: <UpdateProfile/>
-        },
-        // admin routes
-        {
-          path: 'allUsers',
-          element: <AllUser/>
-        },
-        {
-          path: 'addBanner',
-          element: <AddBanner/>
-        },
-        {
-          path: 'allBanner',
-          element: <AllBanner/>
-        },
-        {
-          path: 'addTest',
-          element: <AddTest/>
-        },
-        {
-          path: 'manageTest',
-          element: <ManageTest/>
-        },
-        {
-          path: 'updateTest/:id',
-          element: <UpdateTest/>,
-          loader: ({params})=> fetch(`http://localhost:5000/tests/${params.id}`)
-        },
-      ]
-    }
-  ]);
-  
-  export default router;
+import MyAppointment from "../pages/Dashboard/User/MyAppointment";
+import Reservation from "../pages/Dashboard/Reservation";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: 'allTest',
+        element: <AllTest />
+      },
+      {
+        path: 'about',
+        element: <AboutUs />
+      },
+      {
+        path: 'contact',
+        element: <ContactUs />
+      },
+      {
+        path: 'reviews',
+        element: <Reviews />
+      },
+      {
+        path: 'viewDetailsTest/:id',
+        element: <ViewDetailsTest />
+      },
+      {
+        path: 'login',
+        element: <Login />
+      },
+      {
+        path: 'register',
+        element: <Register />
+      },
+    ]
+  },
+  {
+    path: 'dashboard',
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    children: [
+      {
+        path: 'userProfile',
+        element: <MyProfile />
+      },
+      {
+        path: 'updateProfile',
+        element: <UpdateProfile />
+      },
+      {
+        path: 'appointment',
+        element: <MyAppointment />
+      },
+      // admin routes
+      {
+        path: 'allUsers',
+        element: <AllUser />
+      },
+      {
+        path: 'addBanner',
+        element: <AddBanner />
+      },
+      {
+        path: 'allBanner',
+        element: <AllBanner />
+      },
+      {
+        path: 'addTest',
+        element: <AddTest />
+      },
+      {
+        path: 'manageTest',
+        element: <ManageTest />
+      },
+      {
+        path: 'updateTest/:id',
+        element: <UpdateTest />,
+        loader: ({ params }) => fetch(`http://localhost:5000/tests/${params.id}`)
+      },
+      {
+        path: 'reservation',
+        element: <Reservation />
+      }
+    ]
+  }
+]);
+
+export default router;
