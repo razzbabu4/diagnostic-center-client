@@ -6,30 +6,31 @@ const AddTest = () => {
     const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async (data) => {
-        const { name, image, price, date, details, slots } = data;
+        const { name, image, price, date, time, details, slots } = data;
         console.log(data)
-            // now send the test item data to the server with image url
-            const testItem = {
-                name: name,
-                image: image,
-                price: parseFloat(price),
-                date: date,
-                details: details,
-                slots: parseInt(slots)
-            }
-            const testRes = await axiosSecure.post('/tests', testItem)
-            console.log(testRes.data)
-            if (testRes.data.insertedId) {
-                reset();
-                // success message
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your service has been saved",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
+        // now send the test item data to the server with image url
+        const testItem = {
+            name: name,
+            image: image,
+            price: parseFloat(price),
+            date: date,
+            time: time,
+            details: details,
+            slots: parseInt(slots)
+        }
+        const testRes = await axiosSecure.post('/tests', testItem)
+        console.log(testRes.data)
+        if (testRes.data.insertedId) {
+            reset();
+            // success message
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your service has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     }
     return (
         <div>
@@ -71,9 +72,19 @@ const AddTest = () => {
                         <span className="label-text">Date*</span>
                     </div>
                     <input
-                        type="text"
+                        type="date"
                         placeholder="Date"
                         {...register("date", { required: true })}
+                        className="input input-bordered w-full" />
+                </label>
+                <label className="form-control w-full mb-6">
+                    <div className="label">
+                        <span className="label-text">Time*</span>
+                    </div>
+                    <input
+                        type="time"
+                        placeholder="time"
+                        {...register("time", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
                 <label className="form-control w-full mb-6">

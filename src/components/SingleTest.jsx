@@ -1,4 +1,4 @@
-import { FaCalendarDay, FaDollarSign } from "react-icons/fa";
+import { FaCalendarDay, FaClock, FaDollarSign } from "react-icons/fa";
 import { FaCheckToSlot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -15,9 +15,10 @@ const SingleTest = ({test}) => {
             <div className="card-body">
                 <h2 className="card-title">{test.name}</h2>
                 <span className="font-bold text-gray-400">{test.details}</span>
-                <div className="flex gap-8 my-4">
-                    <span className="flex items-center gap-2 text-lg"><FaCheckToSlot/> Slots: {test.slots}</span>
-                    <span className="flex items-center gap-2 text-lg"><FaCalendarDay/> Date: {test.date}</span>
+                <div className="flex justify-between my-4">
+                    <span className="flex items-center gap-2 text-lg"><FaCheckToSlot/> {test.slots}</span>
+                    <span className="flex items-center gap-2 text-lg"><FaCalendarDay/> {test.date}</span>
+                    <span className="flex items-center gap-2 text-lg"><FaClock/> {test.time}</span>
                 </div>
                 <div className="card-actions">
                     <Link to={`/viewDetailsTest/${test._id}`} className="btn border-none w-full btn-outline bg-teal-500 text-white">View Details</Link>
