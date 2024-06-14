@@ -70,6 +70,8 @@ const AllBanner = () => {
                         <th>Sl.No</th>
                         <th>Name</th>
                         <th>Title</th>
+                        <th>Coupon Code</th>
+                        <th>Discount Rate</th>
                         <th>Description</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -81,6 +83,8 @@ const AllBanner = () => {
                             <th>{index + 1}</th>
                             <td>{banner.name}</td>
                             <td>{banner.title}</td>
+                            <td>{banner.couponCode}</td>
+                            <td>$ {banner.couponRate}</td>
                             <td>{banner.description}</td>
                             <td>
                                 {banner.isActive === 'false' ? <button

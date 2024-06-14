@@ -34,8 +34,8 @@ const AddTest = () => {
     }
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label className="form-control w-full mb-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Name*</span>
                     </div>
@@ -46,7 +46,7 @@ const AddTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Image URL*</span>
                     </div>
@@ -57,7 +57,7 @@ const AddTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Price*</span>
                     </div>
@@ -67,7 +67,7 @@ const AddTest = () => {
                         {...register("price", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Date*</span>
                     </div>
@@ -77,7 +77,7 @@ const AddTest = () => {
                         {...register("date", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Time*</span>
                     </div>
@@ -87,7 +87,7 @@ const AddTest = () => {
                         {...register("time", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Slots*</span>
                     </div>
@@ -98,7 +98,7 @@ const AddTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full md:col-span-2">
                     <div className="label">
                         <span className="label-text">Test Details*</span>
                     </div>
@@ -108,7 +108,7 @@ const AddTest = () => {
                         {...register('details', { required: true })}
                     ></textarea>
                 </label>
-                <button className="btn">
+                <button className="btn md:col-span-2">
                     Add Test
                 </button>
             </form>

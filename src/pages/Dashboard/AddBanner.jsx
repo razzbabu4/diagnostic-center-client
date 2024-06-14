@@ -51,8 +51,8 @@ const AddBanner = () => {
     return (
         <div>
             <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <label className="form-control w-full mb-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 md:gap-6">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Name*</span>
                         </div>
@@ -63,7 +63,7 @@ const AddBanner = () => {
                             className="input input-bordered w-full" />
                     </label>
 
-                    <label className="form-control w-full mb-6">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Banner Title*</span>
                         </div>
@@ -74,7 +74,7 @@ const AddBanner = () => {
                             className="input input-bordered w-full" />
                     </label>
 
-                    <label className="form-control w-full mb-6">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Coupon Code*</span>
                         </div>
@@ -84,7 +84,7 @@ const AddBanner = () => {
                             {...register("couponCode", { required: true })}
                             className="input input-bordered w-full" />
                     </label>
-                    <label className="form-control w-full mb-6">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Coupon Rate*</span>
                         </div>
@@ -95,7 +95,7 @@ const AddBanner = () => {
                             className="input input-bordered w-full" />
                     </label>
 
-                    <label className="form-control w-full mb-6">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Banner Description*</span>
                         </div>
@@ -106,7 +106,7 @@ const AddBanner = () => {
                         ></textarea>
                     </label>
 
-                    <div className="mb-6">
+                    <div>
                         <input type="file" {...register('image', { required: true })} className="file-input w-full max-w-xs" />
                     </div>
                     <button className="btn">

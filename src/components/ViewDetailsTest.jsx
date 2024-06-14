@@ -27,7 +27,7 @@ const ViewDetailsTest = () => {
     const handleDiscount = () => {
         const couponCode2 = couponCode.current.value.toLowerCase();
         console.log(couponCode2)
-        if (couponCode2 === 'hello') {
+        if (couponCode2 === 'spring2024') {
             setDiscount(test.price - 20);
         }
         else {
@@ -43,13 +43,13 @@ const ViewDetailsTest = () => {
                     <h2 className="card-title text-3xl font-bold">{test.name}</h2>
                     <span className="text-md font-bold mb-0">Description : {test.details}</span>
                     <div className="flex flex-col gap-8 my-6">
-                        <div className="flex items-center gap-2 text-lg"><FaCalendarDay />Test Date: {test.date}</div>
+                        <div className="flex items-center gap-2 text-lg"><FaCalendarDay />Date: {test.date}</div>
+                        <div className="flex items-center gap-2 text-lg"><FaCalendarDay />Time: {test.time}</div>
                         <div className="flex items-center gap-2 text-lg"><FaDollarSign />Estimate Price: ${test.price}</div>
                         <div className="flex items-center gap-2 text-lg"><FaCheckToSlot /> Available Slots: {test.slots}</div>
                     </div>
                     <div className="card-actions gap-6 items-end flex-grow">
                         <button className="btn bg-[#1313134D]" onClick={() => document.getElementById('my_modal_3').showModal()}>Book Now</button>
-                        {/* <Link to='/' className="btn bg-[#1313134D]">Book Now</Link> */}
                         <Link to='/' className="btn bg-[#1313134D]">Go back</Link>
                     </div>
                 </div>

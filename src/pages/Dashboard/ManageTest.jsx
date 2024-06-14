@@ -56,6 +56,7 @@ const ManageTest = () => {
                         <th>Price</th>
                         <th>Description</th>
                         <th>Date</th>
+                        <th>Time</th>
                         <th>Slots</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -69,6 +70,7 @@ const ManageTest = () => {
                             <td>$ {test.price}</td>
                             <td>{test.details}</td>
                             <td>{test.date}</td>
+                            <td>{test.time}</td>
                             <td>{test.slots}</td>
                             <td>
                             <Link to={`/dashboard/updateTest/${test._id}`}>

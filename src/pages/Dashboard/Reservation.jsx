@@ -1,13 +1,16 @@
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const Reservation = () => {
     const axiosSecure = useAxiosSecure();
+    const [searchValue, setSearchValue] = useState('');
+    const [searchResult, setSearchResult] = useState('');
 
-    const {data: reservation = [], refetch} = useQuery({
+    const { data: reservation = [], refetch } = useQuery({
         queryKey: ['reservation'],
-        queryFn: async()=>{
+        queryFn: async () => {
             const res = await axiosSecure.get(`/reservation`)
             return res.data;
         }
@@ -38,10 +41,27 @@ const Reservation = () => {
                     })
             }
         });
-
     }
+    const handleSearch = async () => {
+        const res = await axiosSecure.get(`/reservation/${searchValue}`)
+        setSearchResult(res.data)
+    }
+    const displayedReservation = searchResult.length > 0 ? searchResult : reservation;
     return (
-        <div className="overflow-x-auto">
+        <div>
+            <div className="flex gap-2 my-6">
+                <label className="input input-bordered flex items-center gap-2">
+                    <input
+                        type="email"
+                        value={searchValue}
+                        onChange={(e) => { 
+                            setSearchValue(e.target.value);
+                        }}
+                        placeholder="Patients Email"
+                    />
+                </label>
+                <button onClick={handleSearch} className="btn btn-accent">Search</button>
+            </div>
             <table className="table table-zebra w-full overflow-x-auto">
                 {/* head */}
                 <thead>
@@ -59,7 +79,7 @@ const Reservation = () => {
                 </thead>
                 <tbody>
                     {
-                        reservation.map((reserve, index) => <tr key={reserve._id}>
+                        displayedReservation.map((reserve, index) => <tr key={reserve._id}>
                             <th>{index + 1}</th>
                             <td>{reserve.name}</td>
                             <td>{reserve.email}</td>
