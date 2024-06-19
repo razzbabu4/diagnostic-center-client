@@ -4,6 +4,8 @@
 - Email: demo@email.com
 - Password: Aa@123
 
+## Live Link : https://diagnostic-center-manage-f4ff1.web.app
+
 ## Features
 - Secure Login: Email/password login with Firebase Authentication.
 - User Registration: Sign up with name, avatar, blood group, district, and upazila.
