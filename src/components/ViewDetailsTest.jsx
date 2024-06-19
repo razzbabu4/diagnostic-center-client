@@ -2,12 +2,14 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { FaCalendarDay, FaCheckToSlot } from 'react-icons/fa6';
-import { FaDollarSign } from 'react-icons/fa';
+import { FaBookMedical, FaDollarSign } from 'react-icons/fa';
 import { useRef, useState } from 'react';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
+import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK)
 
@@ -16,6 +18,10 @@ const ViewDetailsTest = () => {
     const [discount, setDiscount] = useState(0);
     const axiosPublic = useAxiosPublic();
     const { id } = useParams();
+
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+
     const { data: test = {}, refetch } = useQuery({
         queryKey: ['test'],
         queryFn: async () => {
@@ -24,11 +30,26 @@ const ViewDetailsTest = () => {
         }
     })
 
+
+    const { data: users = {} } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/users/${user.email}`);
+            return res.data;
+        }
+    });
+
+
     const handleDiscount = () => {
         const couponCode2 = couponCode.current.value.toLowerCase();
         console.log(couponCode2)
         if (couponCode2 === 'spring2024') {
             setDiscount(test.price - 20);
+            couponCode.current.value = ''
+        }
+        else if (couponCode2 === 'winterhealth') {
+            setDiscount(test.price - 15);
+            couponCode.current.value = ''
         }
         else {
             setDiscount(0)
@@ -47,9 +68,15 @@ const ViewDetailsTest = () => {
                         <div className="flex items-center gap-2 text-lg"><FaCalendarDay />Time: {test.time}</div>
                         <div className="flex items-center gap-2 text-lg"><FaDollarSign />Estimate Price: ${test.price}</div>
                         <div className="flex items-center gap-2 text-lg"><FaCheckToSlot /> Available Slots: {test.slots}</div>
+                        <div className="flex items-center gap-2 text-lg"><FaBookMedical /> Booked: {test?.bookings}</div>
                     </div>
                     <div className="card-actions gap-6 items-end flex-grow">
-                        <button className="btn bg-[#1313134D]" onClick={() => document.getElementById('my_modal_3').showModal()}>Book Now</button>
+                        {
+                            users.status === 'active' && test.slots > 0 ?
+                                <button className="btn bg-[#1313134D]" onClick={() => document.getElementById('my_modal_3').showModal()}>Book Now</button>
+                                : <span className='btn' style={{ cursor: 'not-allowed', color: 'gray' }}>Book Now</span>
+                        }
+
                         <Link to='/' className="btn bg-[#1313134D]">Go back</Link>
                     </div>
                 </div>

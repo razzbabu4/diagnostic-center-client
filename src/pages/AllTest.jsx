@@ -28,12 +28,9 @@ const AllTest = () => {
     const handleSearch = async () => {
         const res = await axiosPublic.get(`/searchTestDate/${searchValue}`)
         setSearchAllDate(res.data)
-        // console.log(searchValue)
     }
-    // console.log(searchAllDate)
 
     const displayedTests = searchAllDate.length ? searchAllDate : tests;
-    // console.log(displayedTests)
 
     const pagination = {
         clickable: true,

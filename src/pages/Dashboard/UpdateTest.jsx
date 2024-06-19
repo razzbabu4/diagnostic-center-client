@@ -5,13 +5,13 @@ import Swal from 'sweetalert2';
 
 
 const UpdateTest = () => {
-    const { name, image, price, date, details, slots, _id } = useLoaderData();
+    const { name, image, price, date, time, details, slots, _id } = useLoaderData();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate()
 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async (data) => {
-        const { name, image, price, date, details, slots } = data;
+        const { name, image, price, date, time, details, slots } = data;
         console.log(data)
 
         const testItem = {
@@ -19,6 +19,7 @@ const UpdateTest = () => {
             image: image,
             price: parseFloat(price),
             date: date,
+            time: time,
             details: details,
             slots: parseInt(slots)
         }
@@ -39,8 +40,8 @@ const UpdateTest = () => {
     }
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label className="form-control w-full mb-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Name*</span>
                     </div>
@@ -52,7 +53,7 @@ const UpdateTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Image URL*</span>
                     </div>
@@ -64,7 +65,7 @@ const UpdateTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Price*</span>
                     </div>
@@ -75,7 +76,7 @@ const UpdateTest = () => {
                         {...register("price", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Date*</span>
                     </div>
@@ -86,7 +87,18 @@ const UpdateTest = () => {
                         {...register("date", { required: true })}
                         className="input input-bordered w-full" />
                 </label>
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full">
+                    <div className="label">
+                        <span className="label-text">Time*</span>
+                    </div>
+                    <input
+                        type="time"
+                        defaultValue={time}
+                        placeholder="time"
+                        {...register("time", { required: true })}
+                        className="input input-bordered w-full" />
+                </label>
+                <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Slots*</span>
                     </div>
@@ -98,7 +110,7 @@ const UpdateTest = () => {
                         className="input input-bordered w-full" />
                 </label>
 
-                <label className="form-control w-full mb-6">
+                <label className="form-control w-full md:col-span-2">
                     <div className="label">
                         <span className="label-text">Test Details*</span>
                     </div>
@@ -109,7 +121,7 @@ const UpdateTest = () => {
                         {...register('details', { required: true })}
                     ></textarea>
                 </label>
-                <button className="btn">
+                <button className="btn md:col-span-2">
                     Update Test
                 </button>
             </form>

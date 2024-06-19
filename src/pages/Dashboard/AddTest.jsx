@@ -16,7 +16,8 @@ const AddTest = () => {
             date: date,
             time: time,
             details: details,
-            slots: parseInt(slots)
+            slots: parseInt(slots),
+            bookings: 0
         }
         const testRes = await axiosSecure.post('/tests', testItem)
         console.log(testRes.data)

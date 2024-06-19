@@ -7,7 +7,7 @@ const SingleTest = ({test}) => {
     return (
         <div className="card card-compact w-full bg-base-100 shadow-xl border ">
             <div className="relative">
-                <figure><img className="h-72 w-full" src={test.image} alt="house" /></figure>
+                <figure><img className="h-72 w-full" src={test.image} alt="service" /></figure>
                 <div className="absolute text-white bg-black font-medium p-3 rounded-tl-xl bg-opacity-50 bottom-0 right-0 flex items-center gap-2">
                     <FaDollarSign/> {test.price}
                 </div>

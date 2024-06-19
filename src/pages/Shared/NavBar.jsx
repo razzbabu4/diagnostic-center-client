@@ -1,24 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAdmin from "../../hooks/useAdmin";
+import icon from '../../../public/icons8-heart-with-pulse.gif'
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const NavBar = () => {
     const { user, logOut } = useAuth();
     const [isAdmin] = useAdmin();
+    const axiosPublic = useAxiosPublic();
+
+    const { data: users = {}} = useQuery({
+        queryKey: ['users', user?.email],
+        enabled: !!user,
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/users/${user.email}`);
+            return res.data;
+        }
+    });
+// console.log(users?.status)
     const navOptions = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/allTest'>All Test</Link></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/allTest'>All Test</NavLink></li>
         {
-            user && isAdmin && <li><Link to='/dashboard'>Dashboard</Link></li>
+            user && isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         }
         {
-            user && !isAdmin && <li><Link to='/dashboard/userProfile'>Dashboard</Link></li>
+            user && !isAdmin && <li>{
+                users?.status === 'active' ? (
+                    <NavLink to='/dashboard/userProfile'>Dashboard</NavLink>
+                ) : (
+                    <span style={{ cursor: 'not-allowed', color: 'gray' }}>Dashboard</span>
+                )
+            }</li>
         }
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/contact'>Contact Us</Link></li>
-        <li><Link to='/reviews'>Reviews</Link></li>
-        
+        <li><NavLink to='/about'>About</NavLink></li>
+        <li><NavLink to='/contact'>Contact Us</NavLink></li>
+        <li><NavLink to='/reviews'>Reviews</NavLink></li>
+
     </>
     return (
         <div>
@@ -32,7 +53,7 @@ const NavBar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Health Quest</a>
+                    <a className="btn btn-ghost text-xl"><img className="h-10 w-10 hidden lg:flex" src={icon} alt="icon" /><span>Health Quest</span></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -43,7 +64,6 @@ const NavBar = () => {
                     {
                         user ?
                             <>
-                                <span>{user?.email} </span>
                                 <Link className="bg-red-500 py-1 px-3 text-white rounded-md ml-2" onClick={logOut}>Logout</Link>
                             </>
                             :
