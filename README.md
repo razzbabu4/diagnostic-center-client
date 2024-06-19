@@ -1,8 +1,17 @@
-# React + Vite
+# Health Quest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Admin
+- Email: demo@email.com
+- Password: Aa@123
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Secure Login: Email/password login with Firebase Authentication.
+- User Registration: Sign up with name, avatar, blood group, district, and upazila.
+- User Dashboard: Manage appointments and view test results.
+- Appointment Booking: Search, book, and cancel tests with real-time slot availability.
+- Dynamic Homepage: Display promotions, featured tests, and health tips.
+- Admin Dashboard: Manage users, tests, and banners.
+- Test Results: Upload, view, and download test results.
+- Payments: Secure payments with Stripe and apply discount codes.
+- PDF Reports: Generate and download detailed user reports.
+- Statistics: Visual charts of most booked tests and service status.
