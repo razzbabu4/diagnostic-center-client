@@ -23,6 +23,7 @@ import MyProfile from "../pages/Dashboard/User/MyProfile";
 import UpdateProfile from "../pages/Dashboard/User/UpdateProfile";
 import MyAppointment from "../pages/Dashboard/User/MyAppointment";
 import Reservation from "../pages/Dashboard/Reservation";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: 'allUsers',
         element: <AllUser />
+      },
+      {
+        path: 'adminHome',
+        element: <AdminHome />
       },
       {
         path: 'addBanner',

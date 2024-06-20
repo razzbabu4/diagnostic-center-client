@@ -70,11 +70,11 @@ const Reservation = () => {
                         <th>Test Name</th>
                         <th>Patient Email</th>
                         <th>Paid Price</th>
-                        <th>Description</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Status</th>
                         <th>Cancel</th>
+                        <th>Report</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,7 +84,6 @@ const Reservation = () => {
                             <td>{reserve.name}</td>
                             <td>{reserve.email}</td>
                             <td>${reserve.price}</td>
-                            <td>{reserve.details}</td>
                             <td>{reserve.date}</td>
                             <td>{reserve.time}</td>
                             <td>{reserve.status}</td>
@@ -94,6 +93,9 @@ const Reservation = () => {
                                     className="btn btn-sm bg-red-500 text-white">
                                     Cancel
                                 </button>
+                            </td>
+                            <td>
+                                <button className='btn btn-sm'>Upload Report</button>
                             </td>
                         </tr>)
                     }
