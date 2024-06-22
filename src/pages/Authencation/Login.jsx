@@ -30,7 +30,8 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate(location?.state ? location.state : '/')
+                // navigate('/dashboard/userProfile')
+                navigate(location?.state ? location.state : '/dashboard/userProfile')
             })
             .catch(()=>{
                 Swal.fire({

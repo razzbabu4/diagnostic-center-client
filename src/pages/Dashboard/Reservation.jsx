@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaUpload } from 'react-icons/fa';
 
 const Reservation = () => {
     const axiosSecure = useAxiosSecure();
@@ -54,7 +56,7 @@ const Reservation = () => {
                     <input
                         type="email"
                         value={searchValue}
-                        onChange={(e) => { 
+                        onChange={(e) => {
                             setSearchValue(e.target.value);
                         }}
                         placeholder="Patients Email"
@@ -95,7 +97,9 @@ const Reservation = () => {
                                 </button>
                             </td>
                             <td>
-                                <button className='btn btn-sm'>Upload Report</button>
+                                <Link to={`/dashboard/uploadReport/${reserve._id}`}>
+                                    <button className='btn btn-sm bg-teal-500 text-white'><FaUpload/></button>
+                                </Link>
                             </td>
                         </tr>)
                     }

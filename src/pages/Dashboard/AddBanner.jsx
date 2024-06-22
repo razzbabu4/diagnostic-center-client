@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddBanner = () => {
+    const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm();
@@ -44,6 +46,7 @@ const AddBanner = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate('/dashboard/allBanner');
             }
         }
         console.log(res.data)

@@ -2,9 +2,9 @@ import profile from '../../../public/image.png'
 const PatientsReviews = () => {
     return (
         <section className="my-8">
-            <div className="container flex flex-col items-center mx-auto mb-4 md:p-10 md:px-12">
-                <h1 className="p-4 text-4xl font-semibold leading-none text-center">What our patients are saying</h1>
-                <p className="text-center w-2/3 mx-auto mt-4">At Health Quest Diagnostic Center, we are proud of the positive feedback we receive from our patients. Here are some testimonials that highlight our commitment to quality care, patient comfort, and reliable diagnostic services.</p>
+            <div className="container flex flex-col items-center mx-auto mb-4 md:p-10 px-2 md:px-12">
+                <h1 className="p-4 text-2xl md:text-4xl font-semibold leading-none text-center">What our patients are saying</h1>
+                <p className="text-center md:w-2/3 mx-auto mt-4">At Health Quest Diagnostic Center, we are proud of the positive feedback we receive from our patients. Here are some testimonials that highlight our commitment to quality care, patient comfort, and reliable diagnostic services.</p>
             </div>
             <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
                 <div className="flex flex-col max-w-sm mx-4 my-6 shadow-lg">

@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
+import {useNavigate} from 'react-router-dom';
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from 'sweetalert2';
 
 const AddTest = () => {
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async (data) => {
@@ -31,6 +33,7 @@ const AddTest = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/dashboard/manageTest');
         }
     }
     return (

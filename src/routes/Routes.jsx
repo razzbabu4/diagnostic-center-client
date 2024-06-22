@@ -24,6 +24,8 @@ import UpdateProfile from "../pages/Dashboard/User/UpdateProfile";
 import MyAppointment from "../pages/Dashboard/User/MyAppointment";
 import Reservation from "../pages/Dashboard/Reservation";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import UploadReport from "../pages/Dashboard/UploadReport";
+import TestResult from "../pages/Dashboard/User/TestResult";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,10 @@ const router = createBrowserRouter([
         path: 'appointment',
         element: <MyAppointment />
       },
+      {
+        path: 'testResult',
+        element: <TestResult />
+      },
       // admin routes
       {
         path: 'allUsers',
@@ -109,12 +115,17 @@ const router = createBrowserRouter([
       {
         path: 'updateTest/:id',
         element: <UpdateTest />,
-        loader: ({ params }) => fetch(`https://diagnostic-center-management-system-server.vercel.app/tests/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/tests/${params.id}`)
       },
       {
         path: 'reservation',
         element: <Reservation />
+      },
+      {
+        path: 'uploadReport/:id',
+        element: <UploadReport/>
       }
+
     ]
   }
 ]);

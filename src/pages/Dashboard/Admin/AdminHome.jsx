@@ -1,4 +1,4 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Legend} from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend} from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
@@ -8,7 +8,7 @@ const data = [
         uv: 300,
     },
     {
-        name: 'Pep Seamer',
+        name: 'Pap Seamer',
         uv: 281,
     },
     {
@@ -23,7 +23,7 @@ const data = [
 
 const data2 = [
     { name: 'Complete Report', value: 400 },
-    { name: 'Pending Report', value: 300 },
+    { name: 'Pending Report', value: 200 },
   ];
 
 const getPath = (x, y, width, height) => {
@@ -56,10 +56,11 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 const AdminHome = () => {
     return (
         <div className='flex flex-col lg:flex-row'>
-            <div className='lg:w-1/2'>
-                <ResponsiveContainer width="100%" height={500}>
+            <div className='w-full lg:w-1/2'>
+                {/* <ResponsiveContainer width="100%" height={500}> */}
                     <BarChart
                         data={data}
+                        width={500} height={500}
                         margin={{
                             top: 20,
                             right: 5,
@@ -76,18 +77,18 @@ const AdminHome = () => {
                             ))}
                         </Bar>
                     </BarChart>
-                </ResponsiveContainer>
+                {/* </ResponsiveContainer> */}
             </div>
-            <div className="Lg:w-1/2">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart width={400} height={400}>
+            <div className="w-full lg:w-1/2">
+                    {/* <ResponsiveContainer width="100%" height="100%"> */}
+                        <PieChart className='mx-auto' width={400} height={400}>
                             <Pie
                                 data={data2}
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
                                 label={renderCustomizedLabel}
-                                outerRadius={80}
+                                outerRadius={100}
                                 fill="#8884d8"
                                 dataKey="value"
                             >
@@ -97,10 +98,8 @@ const AdminHome = () => {
                             </Pie>
                             <Legend></Legend>
                         </PieChart>
-                    </ResponsiveContainer>
+                    {/* </ResponsiveContainer> */}
                 </div>
-
-
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SingleTest from "../../components/SingleTest";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from '@tanstack/react-query';
@@ -5,6 +6,11 @@ import { useQuery } from '@tanstack/react-query';
 
 const FeaturedTests = () => {
     const axiosPublic = useAxiosPublic();
+    const [testsLength, setTestsLength] = useState(false);
+
+    const handleShowAll = () => {
+        setTestsLength(!testsLength);
+    }
 
     const { data: tests = [] } = useQuery({
         queryKey: ['tests'],
@@ -16,14 +22,19 @@ const FeaturedTests = () => {
     const sortedTests = [...tests].sort((a, b) => b.bookings - a.bookings);
     return (
         <div>
-            <div className="container flex flex-col items-center mx-auto mb-4 md:p-10 md:px-12">
-                <h1 className="p-4 text-4xl font-semibold leading-none text-center">Most Booked Services</h1>
-                <p className="text-center w-2/3 mx-auto mt-4">At Health Quest Diagnostic Center, we are proud of the positive feedback we receive from our patients. Here are some testimonials that highlight our commitment to quality care, patient comfort, and reliable diagnostic services.</p>
+            <div className="container flex flex-col items-center mx-auto mb-4 md:p-10 px-2 md:px-12">
+                <h1 className="p-4 text-2xl md:text-4xl font-semibold leading-none text-center">Most Booked Services</h1>
+                <p className="text-center md:w-2/3 mx-auto mt-4">Discover the most sought-after diagnostic services at Health Quest Diagnostic Center. From comprehensive health check-ups to specialized imaging and lab tests, our top-rated services are designed to meet your healthcare needs with precision and care.</p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {
-                    sortedTests.slice(0, 3).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
+                    sortedTests.slice(0, testsLength ? tests.length : 3).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
                 }
+            </div>
+            <div className="text-center">
+                <button onClick={handleShowAll} className="btn btn-outline bg-teal-500 text-white my-4">
+                    {!testsLength ? 'Show All' : 'Show Less'}
+                </button>
             </div>
         </div>
     );

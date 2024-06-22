@@ -9,13 +9,17 @@ const AllUser = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const modalRef = useRef(null);
 
-    const { data: users = [], refetch } = useQuery({
-        queryKey: ['users'],
+    const { data: user = [], refetch, isLoading } = useQuery({
+        queryKey: ['user'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users');
             return res.data;
         }
     })
+
+    if(isLoading){
+        <span>Loading.........</span>
+    }
 
     const handleMakeAdmin = (user) => {
         axiosSecure.patch(`/users/admin/${user._id}`)
@@ -62,7 +66,7 @@ const AllUser = () => {
     return (
         <div>
             <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
+                <table className="table table-zebra w-full overflow-auto">
                     {/* head */}
                     <thead>
                         <tr>
@@ -76,7 +80,7 @@ const AllUser = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr key={user._id}>
+                            user.map((user, index) => <tr key={user._id}>
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
