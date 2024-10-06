@@ -2,25 +2,32 @@ import { useState } from "react";
 import SingleTest from "../components/SingleTest";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from '@tanstack/react-query';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import './AllTest.css'
-// import required modules
-import { Pagination } from 'swiper/modules';
-
+import { useLoaderData } from "react-router-dom";
 
 const AllTest = () => {
     const axiosPublic = useAxiosPublic();
     const [searchValue, setSearchValue] = useState('');
     const [searchAllDate, setSearchAllDate] = useState([]);
 
+    // pagination
+    const { count } = useLoaderData();
+    console.log(count)
+
+    // dynamic pages 
+    const [testPerPage, setTestPerPage] = useState(3);
+    const numberOfPages = Math.ceil(count / testPerPage);
+
+    const pages = [...Array(numberOfPages).keys()];
+    console.log(pages)
+
+    // current page
+    const [currentPage, setCurrentPage] = useState(0);
+
+
     const { data: tests = [] } = useQuery({
-        queryKey: ['tests'],
+        queryKey: ['tests', currentPage, testPerPage],
         queryFn: async () => {
-            const res = await axiosPublic.get('/tests')
+            const res = await axiosPublic.get(`/tests?page=${currentPage}&item=${testPerPage}`)
             return res.data;
         }
     });
@@ -32,12 +39,24 @@ const AllTest = () => {
 
     const displayedTests = searchAllDate.length ? searchAllDate : tests;
 
-    const pagination = {
-        clickable: true,
-        renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + '</span>';
-        },
-    };
+
+    const handleTestPerPage = (e) => {
+        const testNumber = e.target.value;
+        setTestPerPage(testNumber)
+        setCurrentPage(0)
+    }
+
+    const handlePrevPage = () => {
+        if(currentPage > 0){
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
 
     return (
         <div className="my-8">
@@ -55,26 +74,31 @@ const AllTest = () => {
                 </label>
                 <button onClick={handleSearch} className="btn btn-accent">Search</button>
             </div>
-            <Swiper
-                pagination={pagination}
-                modules={[Pagination]}
-                className="mySwiper"
-            >
-                <SwiperSlide>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
-                        {
-                            displayedTests.slice(0, 6).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
-                        }
-                    </div>
-                </SwiperSlide>
-                {displayedTests.length > 6 && <SwiperSlide>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
-                        {
-                            displayedTests.slice(6, 12).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
-                        }
-                    </div>
-                </SwiperSlide>}
-            </Swiper>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
+                {
+                    displayedTests.map(test => <SingleTest key={test._id} test={test}></SingleTest>)
+                }
+            </div>
+            <div className="text-center">
+                <button className="btn mr-2" onClick={handlePrevPage}>Prev</button>
+                {
+                    pages.map(page =>
+                        <button
+                            className={`btn mr-2 ${currentPage === page ? 'bg-teal-400 text-white' : undefined}`}
+                            onClick={() => setCurrentPage(page)}
+                            key={page}>
+                            {page + 1}
+                        </button>
+                    )
+                }
+                <button className="btn mr-2" onClick={handleNextPage}>Next</button>
+                <select name="Items per page" value={testPerPage} onChange={handleTestPerPage}>
+                    <option value="3" id="">3</option>
+                    <option value="6" id="">6</option>
+                    <option value="9" id="">9</option>
+                </select>
+
+            </div>
         </div>
     );
 };

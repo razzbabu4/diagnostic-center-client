@@ -4,14 +4,16 @@ import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useNavigate } from 'react-router-dom';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const UpdateProfile = () => {
-    const {user, setLoading, updateUserProfile } = useAuth();
+    const { user, setLoading, updateUserProfile } = useAuth();
     const axiosPublic = useAxiosPublic();
-    
+    const navigate = useNavigate();
+
     const axiosSecure = useAxiosSecure()
     const { data: users = {}, refetch } = useQuery({
         queryKey: ['users'],
@@ -21,13 +23,13 @@ const UpdateProfile = () => {
         }
     });
 
-    const {data: district = []} = useQuery({
+    const { data: district = [] } = useQuery({
         queryKey: ['district'],
-        queryFn: async() =>{
+        queryFn: async () => {
             const res = await axiosPublic.get('/district')
             return res.data;
         }
-    }); 
+    });
 
     const {
         register,
@@ -40,9 +42,9 @@ const UpdateProfile = () => {
     const selectedDistrict = watch('district');
     const selectedDistrictId = district.find(d => d.name === selectedDistrict)?.id;
 
-     const {data: upazila = []} = useQuery({
+    const { data: upazila = [] } = useQuery({
         queryKey: ['upazila', selectedDistrictId],
-        queryFn: async() =>{
+        queryFn: async () => {
             const res = await axiosPublic.get(`/upazila/${selectedDistrictId}`)
             return res.data;
         }
@@ -61,34 +63,35 @@ const UpdateProfile = () => {
         });
 
         const image = res.data.data.display_url;
-         if (res.data.success) {
-                    updateUserProfile(data.name, image)
-                        .then(() => {
-                            // user entry in database
-                            const userInfo = {
-                                name: data.name,
-                                blood: data.blood,
-                                district: data.district,
-                                upazila: data.upazila,
+        if (res.data.success) {
+            updateUserProfile(data.name, image)
+                .then(() => {
+                    // user entry in database
+                    const userInfo = {
+                        name: data.name,
+                        blood: data.blood,
+                        district: data.district,
+                        upazila: data.upazila,
+                    }
+                    axiosSecure.patch(`/users/${user.email}`, userInfo)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                console.log('user added to the database')
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Profile updated successfully",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
                             }
-                            axiosSecure.patch(`/users/${user.email}`, userInfo)
-                                .then(res => {
-                                    if (res.data.modifiedCount > 0) {
-                                        console.log('user added to the database')
-                                        Swal.fire({
-                                            position: "top-end",
-                                            icon: "success",
-                                            title: "Profile updated successfully",
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        });
-                                        reset();
-                                        refetch();
-                                        setLoading(false)
-                                    }
-                                })
                         });
-                }
+                    reset();
+                    refetch();
+                    setLoading(false);
+                    navigate('/dashboard/userProfile')
+                });
+        }
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -127,7 +130,7 @@ const UpdateProfile = () => {
                             <select defaultValue={users.district} {...register("district")} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
                                 {
-                                    district.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                    district.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
                                 }
                             </select>
                         </div>
@@ -138,7 +141,7 @@ const UpdateProfile = () => {
                             <select defaultValue={users.upazila} {...register("upazila")} className="select select-bordered w-full">
                                 <option disabled value='default'>Select</option>
                                 {
-                                    upazila.map(item=> <option key={item._id} value={item.name}>{item.name}</option>)
+                                    upazila.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
                                 }
                             </select>
                         </div>

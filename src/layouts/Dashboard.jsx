@@ -10,7 +10,7 @@ import { FaBookBookmark, FaMessage } from 'react-icons/fa6';
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     return (
-        <div className='flex'>
+        <div className='flex min-h-screen'>
             {/* dashboard sidebar */}
             <div className="w-2/5 lg:w-64 min-h-screen bg-teal-600">
                 <ul className="menu p-4 text-white">
@@ -73,8 +73,9 @@ const Dashboard = () => {
                     </NavLink></li>
                 </ul>
             </div>
+
             {/* dashboard content */}
-            <div className='flex-1 p-8'>
+            <div className='flex-1 p-8 min-h-screen'>
                 <Outlet></Outlet>
             </div>
         </div>
