@@ -6,6 +6,8 @@
 
 ## Live Link : https://diagnostic-center-manage-f4ff1.web.app
 
+### Server Site : https://github.com/razzbabu4/diagnostic-center-server
+
 ## Features
 - Secure Login: Email/password login with Firebase Authentication.
 - User Registration: Sign up with name, avatar, blood group, district, and upazila.
