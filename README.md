@@ -1,12 +1,13 @@
 # Health Quest
 
-## Admin
+## Admin Info.
+For admin access, use the following credentials:
 - Email: demo@email.com
 - Password: Aa@123
 
-## Live Link : https://diagnostic-center-manage-f4ff1.web.app
-
-### Server Site : https://github.com/razzbabu4/diagnostic-center-server
+## Necessary Link
+- Live Link : https://diagnostic-center-manage-f4ff1.web.app
+- Server Repository : https://github.com/razzbabu4/diagnostic-center-server
 
 ## Features
 - Secure Login: Email/password login with Firebase Authentication.
