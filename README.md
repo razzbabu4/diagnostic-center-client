@@ -56,3 +56,27 @@ For admin access, use the following credentials:
 - TailwindCSS
 - Express.js
 - MongoDB
+
+## Run the Project Locally
+1. **Clone the Repository**:
+
+    ```sh
+    git clone https://github.com/razzbabu4/diagnostic-center-client
+    cd diagnostic-center-client
+    ```
+
+2. **Install Dependencies**:
+
+    ```sh
+    npm install
+    ```
+
+3. **Set Up Environment Variables**: Create a `.env.local` file in the root directory and add the necessary environment variables. (**Important!**)
+
+4. **Run the Application**:
+
+    ```sh
+    npm run dev -- --host
+    ```
+
+5. **Access the Site**: Open your browser and go to `http://localhost:5173/` or `http://192.168.1.12:5173/` from other devices on the same network to view the application.
