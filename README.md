@@ -61,7 +61,7 @@ For admin access, use the following credentials:
 1. **Clone the Repository**:
 
     ```sh
-    git clone https://github.com/razzbabu4/diagnostic-center-client
+    git clone https://github.com/razzbabu4/diagnostic-center-client.git
     cd diagnostic-center-client
     ```
 
