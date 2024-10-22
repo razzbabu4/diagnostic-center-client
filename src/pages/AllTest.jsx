@@ -92,10 +92,10 @@ const AllTest = () => {
                     )
                 }
                 <button className="btn mr-2" onClick={handleNextPage}>Next</button>
-                <select name="Items per page" value={testPerPage} onChange={handleTestPerPage}>
-                    <option value="3" id="">3</option>
-                    <option value="6" id="">6</option>
-                    <option value="9" id="">9</option>
+                <select value={testPerPage} onChange={handleTestPerPage}>
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
                 </select>
 
             </div>

@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: 'allTest',
         element: <AllTest />,
-        loader: () => fetch(`http://localhost:5000/totalTestCount`)
+        loader: () => fetch(`https://diagnostic-center-management-system-server.vercel.app/totalTestCount`)
       },
       {
         path: 'about',
@@ -116,7 +116,7 @@ const router = createBrowserRouter([
       {
         path: 'updateTest/:id',
         element: <UpdateTest />,
-        loader: ({ params }) => fetch(`http://localhost:5000/tests/${params.id}`)
+        loader: ({ params }) => fetch(`https://diagnostic-center-management-system-server.vercel.app/tests/${params.id}`)
       },
       {
         path: 'reservation',
