@@ -9,6 +9,35 @@ For admin access, use the following credentials:
 - Live Link : https://diagnostic-center-manage-f4ff1.web.app
 - Server Repository : https://github.com/razzbabu4/diagnostic-center-server
 
+## Payment Card Info for Appointment
+<!-- markdownlint-disable MD033 -->
+<details>
+<summary>Test Card Information</summary>
+
+| Card Type                   | Card Number          | CVC          | Expiration Date  | ZIP Code      |
+|-----------------------------|----------------------|--------------|------------------|---------------|
+| Visa                        | 4242424242424242     | Any 3 digits | Any future date  | Any 5 digits  |
+| Visa (debit)                | 4000056655665556     | Any 3 digits | Any future date  | Any 5 digits  |
+| Mastercard                  | 5555555555554444     | Any 3 digits | Any future date  | Any 5 digits  |
+| Mastercard (2-series)       | 2223003122003222     | Any 3 digits | Any future date  | Any 5 digits  |
+| Mastercard (debit)          | 5200828282828210     | Any 3 digits | Any future date  | Any 5 digits  |
+| Mastercard (prepaid)        | 5105105105105100     | Any 3 digits | Any future date  | Any 5 digits  |
+| American Express            | 378282246310005      | Any 4 digits | Any future date  | Any 5 digits  |
+| American Express            | 371449635398431      | Any 4 digits | Any future date  | Any 5 digits  |
+| Discover                    | 6011111111111117     | Any 3 digits | Any future date  | Any 5 digits  |
+| Discover                    | 6011000990139424     | Any 3 digits | Any future date  | Any 5 digits  |
+| Discover (debit)            | 6011981111111113     | Any 3 digits | Any future date  | Any 5 digits  |
+| Diners Club                 | 3056930009020004     | Any 3 digits | Any future date  | Any 5 digits  |
+| Diners Club (14-digit card) | 36227206271667       | Any 3 digits | Any future date  | Any 5 digits  |
+| BCcard and DinaCard         | 6555900000604105     | Any 3 digits | Any future date  | Any 5 digits  |
+| JCB                         | 3566002020360505     | Any 3 digits | Any future date  | Any 5 digits  |
+| UnionPay                    | 6200000000000005     | Any 3 digits | Any future date  | Any 5 digits  |
+| UnionPay (debit)            | 6200000000000047     | Any 3 digits | Any future date  | Any 5 digits  |
+| UnionPay (19-digit card)    | 6205500000000000004  | Any 3 digits | Any future date  | Any 5 digits  |
+
+</details>
+<!-- markdownlint-enable MD033 -->
+
 ## Features
 - Secure Login: Email/password login with Firebase Authentication.
 - User Registration: Sign up with name, avatar, blood group, district, and upazila.
@@ -20,3 +49,10 @@ For admin access, use the following credentials:
 - Payments: Secure payments with Stripe and apply discount codes.
 - PDF Reports: Generate and download detailed user reports.
 - Statistics: Visual charts of most booked tests and service status.
+
+## Technologies Used in this Project
+- ReactJS
+- JavaScript
+- TailwindCSS
+- Express.js
+- MongoDB
