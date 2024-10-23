@@ -64,47 +64,49 @@ const Reservation = () => {
                 </label>
                 <button onClick={handleSearch} className="btn btn-accent">Search</button>
             </div>
-            <table className="table table-zebra w-full overflow-x-auto">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th>Sl.No</th>
-                        <th>Test Name</th>
-                        <th>Patient Email</th>
-                        <th>Paid Price</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th>Cancel</th>
-                        <th>Report</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        displayedReservation.map((reserve, index) => <tr key={reserve._id}>
-                            <th>{index + 1}</th>
-                            <td>{reserve.name}</td>
-                            <td>{reserve.email}</td>
-                            <td>${reserve.price}</td>
-                            <td>{reserve.date}</td>
-                            <td>{reserve.time}</td>
-                            <td>{reserve.status}</td>
-                            <td>
-                                <button
-                                    onClick={() => handleDelateReserve(reserve)}
-                                    className="btn btn-sm bg-red-500 text-white">
-                                    Cancel
-                                </button>
-                            </td>
-                            <td>
-                                <Link to={`/dashboard/uploadReport/${reserve._id}`}>
-                                    <button className='btn btn-sm bg-teal-500 text-white'><FaUpload/></button>
-                                </Link>
-                            </td>
-                        </tr>)
-                    }
-                </tbody>
-            </table>
+            <div className='overflow-x-auto'>
+                <table className="table table-zebra w-full">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>Sl.No</th>
+                            <th>Test Name</th>
+                            <th>Patient Email</th>
+                            <th>Paid Price</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Cancel</th>
+                            <th>Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            displayedReservation.map((reserve, index) => <tr key={reserve._id}>
+                                <th>{index + 1}</th>
+                                <td>{reserve.name}</td>
+                                <td>{reserve.email}</td>
+                                <td>${reserve.price}</td>
+                                <td>{reserve.date}</td>
+                                <td>{reserve.time}</td>
+                                <td>{reserve.status}</td>
+                                <td>
+                                    <button
+                                        onClick={() => handleDelateReserve(reserve)}
+                                        className="btn btn-sm bg-red-500 text-white">
+                                        Cancel
+                                    </button>
+                                </td>
+                                <td>
+                                    <Link to={`/dashboard/uploadReport/${reserve._id}`}>
+                                        <button className='btn btn-sm bg-teal-500 text-white'><FaUpload /></button>
+                                    </Link>
+                                </td>
+                            </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

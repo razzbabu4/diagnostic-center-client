@@ -1,4 +1,4 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend} from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend, ResponsiveContainer} from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
@@ -56,16 +56,16 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 const AdminHome = () => {
     return (
         <div className='flex flex-col lg:flex-row'>
-            <div className='w-full lg:w-1/2'>
-                {/* <ResponsiveContainer width="100%" height={500}> */}
+            <div className='w-full'>
+                <ResponsiveContainer width="100%" height={500}>
                     <BarChart
                         data={data}
-                        width={500} height={500}
+                        width={500} height={400}
                         margin={{
                             top: 20,
-                            right: 5,
-                            left: 5,
-                            bottom: 5,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
@@ -77,10 +77,10 @@ const AdminHome = () => {
                             ))}
                         </Bar>
                     </BarChart>
-                {/* </ResponsiveContainer> */}
+                </ResponsiveContainer>
             </div>
-            <div className="w-full lg:w-1/2">
-                    {/* <ResponsiveContainer width="100%" height="100%"> */}
+            <div className="w-full">
+                    <ResponsiveContainer width="100%" height="100%">
                         <PieChart className='mx-auto' width={400} height={400}>
                             <Pie
                                 data={data2}
@@ -98,7 +98,7 @@ const AdminHome = () => {
                             </Pie>
                             <Legend></Legend>
                         </PieChart>
-                    {/* </ResponsiveContainer> */}
+                    </ResponsiveContainer>
                 </div>
         </div>
     );
