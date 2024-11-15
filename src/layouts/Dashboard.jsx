@@ -104,7 +104,7 @@ const Dashboard = () => {
             </div>
 
             {/* Dashboard navbar button */}
-            <div onClick={() => setNav(!nav)} className='cursor-pointer z-20 p-4 lg:hidden text-white fixed flex w-full bg-stone-950/30 backdrop:blur-md'>
+            <div onClick={() => setNav(!nav)} className='cursor-pointer z-20 p-4 lg:hidden text-white fixed flex w-full bg-stone-950/30 backdrop-blur-md'>
                 {
                     nav ? <FaTimes size={25} /> : <FaBars size={25} />
                 }
@@ -114,7 +114,7 @@ const Dashboard = () => {
             {/* Dashboard navbar for mobile & tab */}
             {
                 nav && (
-                    <ul className='menu absolute w-2/5 min-h-screen text-white bg-teal-600 pt-14 z-10'>
+                    <ul className='menu absolute w-2/5 min-h-screen h-full text-white bg-teal-600 pt-16 z-10'>
                         {
                             isAdmin ?
                                 <>
