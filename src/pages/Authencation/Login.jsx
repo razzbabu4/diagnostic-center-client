@@ -57,8 +57,8 @@ const Login = () => {
     return (
         <div className="w-full max-w-xl p-4 rounded-md shadow sm:p-8 bg-gray-900 text-gray-100 mx-auto">
             <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-            <p className="text-normal text-center text-gray-400 dark:text-gray-600">Dont have account?
-                <Link to='/register' rel="noopener noreferrer" className="focus:underline hover:underline hover:text-blue-600"> Sign up</Link>
+            <p className="text-base text-center text-gray-400 dark:text-gray-600">Dont have account?
+                <Link to='/register' rel="noopener noreferrer" className="text-white focus:underline hover:underline hover:text-blue-600"> Sign up</Link>
             </p>
             <div className="my-6 space-y-4">
                 <button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600 hover:border-gray-300">
@@ -88,7 +88,7 @@ const Login = () => {
                     </div>
                 </div>
                 <div className="form-control mt-6">
-                    <button type="submit" className="btn btn-primary btn-outline text-lg">Sign in</button>
+                    <button type="submit" className="btn btn-accent btn-outline text-lg">Sign in</button>
                 </div>
             </form>
         </div>
