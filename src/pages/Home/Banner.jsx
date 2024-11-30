@@ -13,7 +13,7 @@ const Banner = () => {
         }
     })
     return (
-        <>
+        <div className="md:mt-6">
             {
                 banners.map(banner =>
                     <div key={banner._id}>
@@ -44,7 +44,7 @@ const Banner = () => {
                     </div>
                 )
             }
-        </>
+        </div>
     );
 };
 

@@ -48,7 +48,7 @@ const Recommendations = () => {
                     slot="container-start"
                     className="parallax-bg"
                     style={{
-                        'background-image':
+                        'backgroundImage':
                             'url(https://img.freepik.com/premium-photo/abstract-texture-background_929505-162.jpg)',
                     }}
                     data-swiper-parallax="-23%"

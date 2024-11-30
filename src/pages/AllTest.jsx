@@ -47,7 +47,7 @@ const AllTest = () => {
     }
 
     const handlePrevPage = () => {
-        if(currentPage > 0){
+        if (currentPage > 0) {
             setCurrentPage(currentPage - 1)
         }
     }

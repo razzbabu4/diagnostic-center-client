@@ -52,110 +52,156 @@ const UpdateProfile = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
+        let image = user?.photoURL; // Default to the existing image URL
 
-        // img upload to imagebb and then get an url
-        const imageFile = { image: data.image[0] }
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers: {
-                'content-type': 'multipart/form-data'
+        if (data.image?.length) {
+            // If the user uploads a new image, process it
+            const imageFile = { image: data.image[0] };
+            const res = await axiosPublic.post(image_hosting_api, imageFile, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                },
+            });
+
+            if (res.data.success) {
+                image = res.data.data.display_url; // Update the image URL
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed to upload image",
+                    text: "Please try again later.",
+                });
+                return; // Stop further processing if image upload fails
             }
-        });
+        }
 
-        const image = res.data.data.display_url;
-        if (res.data.success) {
-            updateUserProfile(data.name, image)
-                .then(() => {
-                    // user entry in database
-                    const userInfo = {
-                        name: data.name,
-                        blood: data.blood,
-                        district: data.district,
-                        upazila: data.upazila,
-                    }
-                    axiosSecure.patch(`/users/${user.email}`, userInfo)
-                        .then(res => {
-                            if (res.data.modifiedCount > 0) {
-                                console.log('user added to the database')
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Profile updated successfully",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                            }
-                        });
+        // Proceed with updating user profile
+        updateUserProfile(data.name, image).then(() => {
+            const userInfo = {
+                name: data.name,
+                blood: data.blood,
+                district: data.district,
+                upazila: data.upazila,
+            };
+            axiosSecure.patch(`/users/${user.email}`, userInfo).then((res) => {
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Profile updated successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
                     reset();
                     refetch();
                     setLoading(false);
-                    navigate('/dashboard/userProfile')
-                });
-        }
-    }
+                    navigate("/dashboard/userProfile");
+                }
+            });
+        });
+    };
+
+
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-[calc(100vh-200px)]">
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-left">
                     <h1 className="text-4xl font-bold">Update Your Profile</h1>
                 </div>
                 <div className="card card-body shrink-0 w-full shadow-2xl bg-base-100">
-                    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
-                            <input defaultValue={users.name} type="text" placeholder="Name" className="input input-bordered" {...register("name")} />
+                    {users?.name ? (
+                        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="form-control col-span-2">
+                                <label className="label">
+                                    <span className="label-text">Profile Image</span>
+                                </label>
+                                {/* Show current profile image */}
+                                {user?.photoURL && (
+                                    <div className="mb-4">
+                                        <img
+                                            src={user.photoURL}
+                                            alt="Current Profile"
+                                            className="w-24 h-24 rounded-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                                {/* Optional file upload */}
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    {...register("image")}
+                                    className="file-input w-full max-w-xs"
+                                />
+                                {errors.image && (
+                                    <span className="text-red-500 text-sm mt-1">
+                                        {errors.image.message}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input defaultValue={users.name} type="text" placeholder="Name" className="input input-bordered" {...register("name")} />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Blood Group</span>
+                                </label>
+                                <select defaultValue={users?.blood || 'select please'} {...register("blood")} className="select select-bordered w-full">
+                                    <option disabled value='default'>Select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">District</span>
+                                </label>
+                                <select defaultValue={users?.district || 'select please'} {...register("district")} className="select select-bordered w-full">
+                                    <option disabled value='default'>Select</option>
+                                    {
+                                        district.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
+                                    }
+                                </select>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Subdistrict</span>
+                                </label>
+                                <select defaultValue={users?.upazila || 'select please'} {...register("upazila")} className="select select-bordered w-full">
+                                    <option value='not selected'>Select</option>
+                                    {
+                                        upazila.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
+                                    }
+                                </select>
+                            </div>
+                            <div className="form-control mt-6 md:col-span-2">
+                                <button className="btn btn-primary">Update Now</button>
+                            </div>
+                        </form>
+                    )
+                        : <div className="py-4 rounded shadow-md w-60 sm:w-96 animate-pulse dark:bg-gray-50 h-96">
+                            <div className="flex p-4 space-x-4 sm:px-8">
+                                <div className="flex-shrink-0 w-16 h-16 rounded-full dark:bg-gray-300"></div>
+                                <div className="flex-1 py-2 space-y-4">
+                                    <div className="w-full h-3 rounded dark:bg-gray-300"></div>
+                                    <div className="w-5/6 h-3 rounded dark:bg-gray-300"></div>
+                                </div>
+                            </div>
+                            <div className="p-4 space-y-4 sm:px-8">
+                                <div className="w-full h-4 rounded dark:bg-gray-300"></div>
+                                <div className="w-full h-4 rounded dark:bg-gray-300"></div>
+                                <div className="w-3/4 h-4 rounded dark:bg-gray-300"></div>
+                            </div>
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Blood Group</span>
-                            </label>
-                            <select defaultValue={users.blood} {...register("blood")} className="select select-bordered w-full">
-                                <option disabled value='default'>Select</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">District</span>
-                            </label>
-                            <select defaultValue={users.district} {...register("district")} className="select select-bordered w-full">
-                                <option disabled value='default'>Select</option>
-                                {
-                                    district.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Upazila</span>
-                            </label>
-                            <select defaultValue={users.upazila} {...register("upazila")} className="select select-bordered w-full">
-                                <option disabled value='default'>Select</option>
-                                {
-                                    upazila.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Profile Image</span>
-                            </label>
-                            <input type="file" {...register('image', { required: true })} className="file-input w-full max-w-xs" />
-                            {errors.image && <span>This field is required</span>}
-                        </div>
-                        <div className="form-control mt-6 md:col-span-2">
-                            <button className="btn btn-primary">Update Now</button>
-                        </div>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

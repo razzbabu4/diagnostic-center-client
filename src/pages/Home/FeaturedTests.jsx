@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SingleTest from "../../components/SingleTest";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from '@tanstack/react-query';
@@ -6,12 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 
 const FeaturedTests = () => {
     const axiosPublic = useAxiosPublic();
-    const [testsLength, setTestsLength] = useState(false);
-
-    const handleShowAll = () => {
-        setTestsLength(!testsLength);
-    }
-
     const { data: tests = [] } = useQuery({
         queryKey: ['tests'],
         queryFn: async () => {
@@ -28,13 +21,8 @@ const FeaturedTests = () => {
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {
-                    sortedTests.slice(0, testsLength ? tests.length : 3).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
+                    sortedTests.slice(0, 3).map(test => <SingleTest key={test._id} test={test}></SingleTest>)
                 }
-            </div>
-            <div className="text-center">
-                <button onClick={handleShowAll} className="btn btn-outline bg-teal-500 text-white my-4">
-                    {!testsLength ? 'Show All' : 'Show Less'}
-                </button>
             </div>
         </div>
     );
